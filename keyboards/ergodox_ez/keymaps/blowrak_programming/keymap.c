@@ -8,6 +8,7 @@
 #define SHFT  1 // shifted layer
 #define NAVI  2 // navigation keys
 #define NAVI_TWO 3
+#define GAME  4
 
 enum custom_keycodes {
   PLACEHOLDER = SAFE_RANGE, // can always be here
@@ -133,7 +134,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        KC_TRNS, KC_TRNS, KC_MS_L, KC_MS_D, KC_MS_R, KC_TRNS,
        KC_LSFT, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
        KC_TRNS, KC_TRNS, KC_TRNS, KC_BTN1, KC_BTN2,
-                                       KC_TRNS,KC_SLCK,
+                                       TO(GAME),KC_SLCK,
                                                KC_TRNS,
                                KC_TRNS,KC_TRNS,KC_TRNS,
        // right hand
@@ -188,7 +189,48 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        KC_TRNS,
        KC_TRNS, KC_TRNS, KC_TRNS
 ),
-
+/* Keymap 4: Game
+ *
+ * ,---------------------------------------------------.           ,--------------------------------------------------.
+ * |    Esc  |      |   1  |   2  |   3  |   4  |   5  |           |   6  |   7  |   8  |   9  |   10 |   11 |    12  |
+ * |---------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
+ * |  Tab    |   Q  |  W   |   E  |  R   |  T   |      |           |      |   Y   |  U  |  I   |  O   |   P  |        |
+ * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
+ * |         |   A  |  S   |   D  |  F   |  G   |------|           |------|   H  |   J  |  K   |  L   |      |        |
+ * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
+ * |   Shift |   Z  |  X   |   C  |  V   |  B   |      |           |      |   N  |   M  |  ,   |  .   |  -   |        |
+ * `---------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
+ *   |  Ctrl |      |      |      |      |                                       |      |      |      |      |      |
+ *   `-----------------------------------'                                       `----------------------------------'
+ *                                        ,-------------.       ,-------------.
+ *                                        |      | L0   |       |      |      |
+ *                                 ,------|------|------|       |------+------+------.
+ *                                 |      |      |      |       |      |      |      |
+ *                                 |  Spc |  Ctrl|------|       |------| Backs|  Entr|
+ *                                 |      |      |      |       |      |      |      |
+ *                                 `--------------------'       `--------------------'
+ */
+// SYMBOLS
+[GAME] = LAYOUT_ergodox(
+       // left hand
+       KC_ESC, KC_NO,  KC_1,   KC_2,   KC_3,   KC_4,   KC_5,
+       KC_TAB,  KC_Q,  KC_W, KC_R, KC_S, KC_T, KC_NO,
+       KC_NO,   KC_A,  KC_S, KC_D, KC_F, KC_G,
+       KC_LSFT, KC_Z, KC_X, KC_C, KC_V, KC_B, KC_NO,
+       KC_LCTRL,KC_NO, KC_NO, KC_NO, KC_NO,
+                                       KC_NO,TO(0),
+                                               KC_NO,
+                               KC_SPC,KC_LCTRL,KC_NO,
+       // right hand
+       KC_6,    KC_7,   KC_8,   KC_9,   KC_0,   KC_NO,   KC_NO,
+       KC_NO,   KC_Y,   KC_U,   KC_I,   KC_O,   KC_P,    KC_NO,
+                KC_H,   KC_J,   KC_K,   KC_L,   KC_NO,   KC_NO,
+       KC_NO,   KC_N,   KC_M,   KC_COMM,KC_DOT, KC_MINS, KC_NO,
+                         KC_LEFT,KC_UP, KC_DOWN,  KC_RGHT,  KC_NO,
+       KC_NO, KC_NO,
+       KC_NO,
+       KC_NO, KC_BSPC, KC_ENT
+),
 };
 
 const uint16_t PROGMEM fn_actions[] = {
