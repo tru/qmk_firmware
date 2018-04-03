@@ -40,7 +40,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define MOUSEKEY_MAX_SPEED      7
 #define MOUSEKEY_WHEEL_DELAY 0
 
-#define TAPPING_TOGGLE  1
+#define TAPPING_TOGGLE  2
 
 /* define if matrix has ghost */
 //#define MATRIX_HAS_GHOST
@@ -63,12 +63,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define BACKLIGHT_LEVELS 3
 
 #ifndef LED_BRIGHTNESS_LO
-#define LED_BRIGHTNESS_LO       15
+#define LED_BRIGHTNESS_LO       10
 #endif
 #ifndef LED_BRIGHTNESS_HI
 #define LED_BRIGHTNESS_HI       255
 #endif
-#define LED_BRIGHTNESS_DEFAULT (LED_BRIGHTNESS_HI)
+#define LED_BRIGHTNESS_DEFAULT (LED_BRIGHTNESS_LO)
 
 /* ws2812 RGB LED */
 #define RGB_DI_PIN D7

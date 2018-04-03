@@ -46,8 +46,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         NO_DLR,         NO_AMPR,      NO_LBRC,  NO_LCBR,  NO_RCBR,   NO_LPRN,   NO_EQL,
         LALT(KC_TAB),   NO_SCLN,      KC_COMM,  KC_DOT,   KC_P,      KC_Y,      KC_LALT,
         KC_ESC,         KC_A,         KC_O,     KC_E,     KC_U,      KC_I,
-        MO(SHFT),       NO_APOS,      KC_Q,     KC_J,     KC_K,      KC_B,      KC_LCTRL,
-        MO(NAVI),       MO(NAVI_TWO), KC_LSFT,  KC_LALT,  KC_LGUI,
+        TT(SHFT),       NO_APOS,      KC_Q,     KC_J,     KC_K,      KC_B,      KC_LCTRL,
+        TT(NAVI),       TT(NAVI_TWO), KC_LSFT,  KC_LALT,  KC_LGUI,
                                               CTL_T(S(KC_NO)),KC_F3,
                                                               KC_HOME,
                                                KC_SPC,KC_BSPC,KC_END,
@@ -274,7 +274,19 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   return true;
 }
 
-// Runs constantly in the background, in a loop.
-void matrix_scan_user(void) {
 
+LEADER_EXTERNS();
+void matrix_scan_user(void)
+{
+
+  uint8_t layer = biton32(layer_state);
+
+  if (layer == GAME)
+  {
+    ergodox_right_led_1_on();
+  }
+  else
+  {
+    ergodox_right_led_1_off();
+  }
 };
