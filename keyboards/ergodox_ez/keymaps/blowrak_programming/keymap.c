@@ -9,6 +9,8 @@
 #define NAVI  2 // navigation keys
 #define NAVI_TWO 3
 #define GAME  4
+#define MAC 5
+#define MAC_SHFT 6
 
 enum custom_keycodes {
   PLACEHOLDER = SAFE_RANGE, // can always be here
@@ -119,7 +121,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *   |       |      |      | LClk | RClk |                                       |      |      |      |      |      |
  *   `-----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,-------------.
- *                                        |      | SCRL |       |      |      |
+ *                                        |  GAME| SCRL |       | MAC  |      |
  *                                 ,------|------|------|       |------+------+------.
  *                                 |      |      |      |       |      |      |      |
  *                                 |      |      |------|       |------|      |      |
@@ -143,7 +145,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                 KC_DOWN, KC_LEFT,KC_DOWN, KC_RGHT,  KC_TRNS,  KC_TRNS,
        KC_TRNS, KC_TRNS, KC_HOME,KC_TRNS, KC_END,   KC_TRNS,  KC_TRNS,
                          KC_TRNS,KC_TRNS, KC_TRNS,  KC_TRNS,  KC_TRNS,
-       KC_TRNS, KC_TRNS,
+       TG(MAC), KC_TRNS,
        KC_TRNS,
        KC_TRNS, KC_TRNS, KC_TRNS
 ),
@@ -231,6 +233,90 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        KC_NO,
        KC_NO, KC_BSPC, KC_ENT
 ),
+/* Keymap 5: macOS layer
+ *
+ * ,---------------------------------------------------.           ,--------------------------------------------------.
+ * |         |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+ * |---------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
+ * |         |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+ * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
+ * |         |      |      |      |      |      |------|           |------|      |      |      |      |      |        |
+ * |---------+------+------+------+------+------|  CMD |           |  CMD |------+------+------+------+------+--------|
+ * |         |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+ * `---------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
+ *   |       |      |      |      |  CTRL|                                       | CTRL |      |      |      |      |
+ *   `-----------------------------------'                                       `----------------------------------'
+ *                                        ,-------------.       ,-------------.
+ *                                        |      |      |       |      |      |
+ *                                 ,------|------|------|       |------+------+------.
+ *                                 |      |      |      |       |      |      |      |
+ *                                 |      |      |------|       |------|      |      |
+ *                                 |      |      |      |       |      |      |      |
+ *                                 `--------------------'       `--------------------'
+ */
+// SYMBOLS
+[MAC] = LAYOUT_ergodox(
+       // left hand
+       KC_TRNS, KC_TRNS, NO_LCBR_MAC, NO_RCBR_MAC, KC_TRNS, KC_TRNS, KC_TRNS,
+       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+       MO(MAC_SHFT), KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_LGUI,
+       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_LCTL,
+                                       KC_TRNS,KC_TRNS,
+                                               KC_TRNS,
+                               KC_TRNS,KC_TRNS,KC_TRNS,
+       // right hand
+       KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+       KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+                   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, NO_BSLS_MAC,
+       KC_RGUI,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, MO(MAC_SHFT),
+                            KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+       KC_TRNS,    KC_TRNS,
+       KC_TRNS,
+       KC_TRNS,    KC_TRNS, KC_TRNS
+),
+/* Keymap 1: Shifted layer
+ *
+ * ,--------------------------------------------------.           ,--------------------------------------------------.
+ * |   ~    |   %  |   1  |   2  |   3  |   4  | 5    |           |   6  |   7  |   8  |   9  |   0  |   `  |   _    |
+ * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
+ * | Del    |   :  |   <  |   >  |   P  |   Y  |  Alt |           | Entr |   F  |   G  |   C  |   R  |   L  |   ?    |
+ * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
+ * | Esc    |   A  |   O  |   E  |   U  |   I  |------|           |------|   H  |   D  |   T  |   N  |   S  |   |    |
+ * |--------+------+------+------+------+------| Ctrl |           | Back |------+------+------+------+------+--------|
+ * | L1     |   "  |   Q  |   J  |   K  |   B  |      |           |      |   X  |   M  |   W  |   V  |   Z  | L1     |
+ * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
+ *   |  L2  |  L3 | Shift | Alt  | Win  |                                       |   ^  |   Å  |   Ä  |   Ö  |  L2  |
+ *   `----------------------------------'                                       `----------------------------------'
+ *                                        ,-------------.       ,-------------.
+ *                                        |Ctrl+S|  F3  |       | Alt  |Ctrl/Esc|
+ *                                 ,------|------|------|       |------+--------+------.
+ *                                 |      |      | Home |       | PgUp |        |      |
+ *                                 | Space|Backsp|------|       |------|  Tab   |Enter |
+ *                                 |      |ace   | End  |       | PgDn |        |      |
+ *                                 `--------------------'       `----------------------'
+ */
+[MAC_SHFT] = LAYOUT_ergodox(  // layer  6 : macOS shifted
+        // left hand
+        NO_TILD,        KC_PERC,      KC_1,     KC_2,     KC_3,      KC_4,      KC_5,
+        LALT(KC_TAB),   NO_COLN,      NO_LESS_MAC,  NO_GRTR_MAC,  S(KC_P),   S(KC_Y),   S(KC_LALT),
+        S(KC_ESC),      S(KC_A),      S(KC_O),  S(KC_E),  S(KC_U),   S(KC_I),
+        KC_TRNS,        NO_QUO2,      S(KC_Q),  S(KC_J),  S(KC_K),   S(KC_B),   S(KC_LGUI),
+        KC_TRNS,        KC_TRNS,      KC_LSFT,  S(KC_LALT),  S(KC_LCTL),
+                                              CTL_T(S(KC_NO)),S(KC_F3),
+                                                              S(KC_HOME),
+                                         S(KC_SPC),S(KC_BSPC),S(KC_END),
+        // right hand
+             KC_6,        KC_7,       KC_8,       KC_9,      KC_0,        NO_GRV,     NO_UNDS,
+             S(KC_ENT),   S(KC_F),    S(KC_G),    S(KC_C),   S(KC_R),     S(KC_L),    NO_QUES,
+                          S(KC_H),    S(KC_D),    S(KC_T),   S(KC_N),     S(KC_S),    NO_PIPE_MAC,
+             S(KC_LGUI),  S(KC_X),    S(KC_M),    S(KC_W),   S(KC_V),     S(KC_Z),    KC_TRNS,
+                          NO_CIRC,    S(NO_AA),   S(NO_AE),  S(NO_OSLH),  MO(2),
+             S(KC_LALT),        CTL_T(KC_ESC),
+             S(KC_PGUP),
+             S(KC_PGDN), S(KC_TAB), S(KC_ENT)
+),
+
 };
 
 const uint16_t PROGMEM fn_actions[] = {
